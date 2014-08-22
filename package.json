@@ -1,0 +1,17 @@
+{
+"name": "autumn",
+"main": "autumn-main.js",
+"bin": "./autumn.js",
+"preferGlobal": true,
+"version": "0.0.1",
+"description": "A tool to export answers from a Formspring (Spring.me) account.",
+"keywords": [
+   "formspring", "spring", "spring.me", "answers", "autumn"
+],
+"author": { "name": "Mithgol the Webmaster" },
+"license": "MIT",
+"repository": {
+   "type": "git",
+   "url": "https://github.com/Mithgol/node-autumn.git"
+}
+}
