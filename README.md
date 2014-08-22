@@ -14,6 +14,18 @@ It is called **Autumn** (antonymous to the “Spring” it exports).
 
 You may visit https://github.com/Mithgol/node-autumn#readme occasionally to read the latest `README` because the package's version is not planned to grow after changes when they happen in `README` only. (And `npm publish --force` is [forbidden](http://blog.npmjs.org/post/77758351673/no-more-npm-publish-f) nowadays.)
 
+## Testing Autumn
+
+The tests are not included in the npm package of the module (to keep it small). Use the version from GitHub.
+
+It is necessary to install [JSHint](http://jshint.com/) for testing.
+
+* You may install JSHint globally (`npm install jshint -g`) or locally (`npm install jshint` in the directory of Autumn).
+
+After that you may run `npm test` (in the directory of Autumn).
+
+Only the errors in JavaScript source code are caught; the code's behaviour is not tested.
+
 ## License
 
 MIT license (see the `LICENSE` file).
