@@ -40,7 +40,8 @@ var writeAnswers = function(){
    logOK('JSON file written: ' + filePath);
 };
 
-var performNextStep = function(lastID){
+var performNextStep = function(lastID, supposedShift){
+   var idOriginShift = supposedShift || 2;
    var nextURL = 'http://beta-api.formspring.me/answered/list/' + userName;
    if( typeof lastID !== 'undefined' ){
       nextURL += '?before=' + lastID;
@@ -71,18 +72,51 @@ var performNextStep = function(lastID){
          answers = body.response;
          if( answers.length < 2 ) return writeAnswers();
       } else { // results of an additional request
+         var mismatch = false;
          if( body.response[0].id !== answers[answers.length - 1].id ){
+            var mismatch = true;
             logFAIL('id mismatch');
-            logSTATUS('Response body:');
-            console.log(body.response);
-            process.exit(5);
-         } else body.response.shift();
-         if( body.response.length < 1 ){
-            return writeAnswers();
-         } else answers = answers.concat(body.response);
+            logSTATUS('Response body initial ID: ' + body.response[0].id);
+            logSTATUS('Current answers final ID: ' + answers[answers.length - 1].id);
+            if( body.response[0].id < answers[answers.length - 1].id ){
+               idOriginShift++;
+               logSTATUS('Trying new origin shift: ' + idOriginShift);
+               if( idOriginShift >= 19 ){
+                  logFAIL('origin shift too large');
+                  process.exit(5);
+               }
+            } else { // try to prevent the mismatch
+               var dropCounter = 0;
+               while( mismatch && body.response.length > 2 ){
+                  body.response.shift();
+                  dropCounter++;
+                  if( body.response[0].id === answers[answers.length - 1].id ){
+                     // mismatch prevented!
+                     mismatch = false;
+                     logOK('mismatch prevented, antishift = ' + dropCounter);
+                     idOriginShift -= dropCounter;
+                     logSTATUS('Trying new origin shift: ' + idOriginShift);
+                     if( idOriginShift < 2 ){
+                        logFAIL('origin shift too small');
+                        process.exit(5);
+                     }
+                  }
+               }
+               if( mismatch ){
+                  logFAIL('unrecoverable mismatch');
+                  process.exit(6);
+               }
+            }
+         }
+         if( !mismatch ){ // mismatch prevented or correct overlapping detected
+            body.response.shift();
+            if( body.response.length < 1 ){
+               return writeAnswers();
+            } else answers = answers.concat(body.response);
+         }
       }
       // perform next request
-      var beforeID = answers[answers.length - 2].id;
+      var beforeID = answers[answers.length - idOriginShift].id;
       if( typeof beforeID === 'undefined' ){
          logFAIL('undefined id detected');
          logSTATUS('Answers:');
@@ -90,7 +124,7 @@ var performNextStep = function(lastID){
          process.exit(6);
       }
       setImmediate(function(){
-         performNextStep(beforeID);
+         performNextStep(beforeID, idOriginShift);
       });
    });
 };
