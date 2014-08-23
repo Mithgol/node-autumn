@@ -87,7 +87,7 @@ var performNextStep = function(lastID, supposedShift){
             if( body.response[0].id < answers[answers.length - 1].id ){
                idOriginShift++;
                logSTATUS('Trying new origin shift: ' + idOriginShift);
-               if( idOriginShift >= 19 ){
+               if( idOriginShift > answers.length - 2 ){
                   logFAIL('origin shift too large');
                   process.exit(5);
                }
