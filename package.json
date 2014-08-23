@@ -15,7 +15,8 @@
    "url": "https://github.com/Mithgol/node-autumn.git"
 },
 "dependencies": {
-   "ansi": "~0.3.0"
+   "ansi": "~0.3.0",
+   "request": "~2.40.0"
 },
 "scripts": {
    "test": "jshint autumn.js autumn-main.js"
