@@ -36,8 +36,12 @@ var answers = [];
 
 var writeAnswers = function(){
    var filePath = path.resolve(process.cwd(), userName + '.autumn.json');
+   logSTATUS('Writing JSON file: ' + filePath);
    fs.writeFileSync(filePath, JSON.stringify(answers, null, '   '));
    logOK('JSON file written: ' + filePath);
+   logOK(
+      'Done. Congratulations! ' + answers.length + ' answers were exported.'
+   );
 };
 
 var performNextStep = function(lastID, supposedShift){
@@ -55,7 +59,7 @@ var performNextStep = function(lastID, supposedShift){
          console.log(response);
          process.exit(2);
       }
-      logOK(nextURL);
+      logOK(nextURL.replace(/^(?:http:\/\/)/, ''));
       if( body.status !== 'ok' ){
          logFAIL('status is not ok');
          logSTATUS('Response:');
@@ -74,10 +78,12 @@ var performNextStep = function(lastID, supposedShift){
       } else { // results of an additional request
          var mismatch = false;
          if( body.response[0].id !== answers[answers.length - 1].id ){
-            var mismatch = true;
+            mismatch = true;
             logFAIL('id mismatch');
             logSTATUS('Response body initial ID: ' + body.response[0].id);
-            logSTATUS('Current answers final ID: ' + answers[answers.length - 1].id);
+            logSTATUS('Current answers final ID: ' +
+               answers[answers.length - 1].id
+            );
             if( body.response[0].id < answers[answers.length - 1].id ){
                idOriginShift++;
                logSTATUS('Trying new origin shift: ' + idOriginShift);
@@ -90,8 +96,9 @@ var performNextStep = function(lastID, supposedShift){
                while( mismatch && body.response.length > 2 ){
                   body.response.shift();
                   dropCounter++;
-                  if( body.response[0].id === answers[answers.length - 1].id ){
-                     // mismatch prevented!
+                  if(
+                     body.response[0].id === answers[answers.length - 1].id
+                  ){ // mismatch prevented!
                      mismatch = false;
                      logOK('mismatch prevented, antishift = ' + dropCounter);
                      idOriginShift -= dropCounter;
@@ -108,7 +115,7 @@ var performNextStep = function(lastID, supposedShift){
                }
             }
          }
-         if( !mismatch ){ // mismatch prevented or correct overlapping detected
+         if( !mismatch ){// mismatch prevented or correct overlapping detected
             body.response.shift();
             if( body.response.length < 1 ){
                return writeAnswers();
