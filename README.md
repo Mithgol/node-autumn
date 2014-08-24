@@ -20,6 +20,10 @@ Run `autumn username` (for example, `autumn Mithgol`) to export answers from t
 
 The list of questions and answers is exported to the file `username.autumn.json` in the current directory. That file is generated as UTF-8 text containing a [JSON](http://json.org/) array of answers (in reverse chronological order).
 
+Example:
+
+![(screenshot)](https://cloud.githubusercontent.com/assets/1088720/4023135/a658754e-2b77-11e4-88e2-6f5f8dfe5628.gif)
+
 ## Testing Autumn
 
 [![(build testing status)](https://travis-ci.org/Mithgol/node-autumn.svg?branch=master)](https://travis-ci.org/Mithgol/node-autumn)
