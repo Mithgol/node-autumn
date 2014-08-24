@@ -3,7 +3,7 @@
 "main": "autumn-main.js",
 "bin": "./autumn.js",
 "preferGlobal": true,
-"version": "1.0.1",
+"version": "1.0.2",
 "description": "A tool to export answers from a Formspring (Spring.me) account.",
 "keywords": [
    "formspring", "spring", "spring.me", "answers", "autumn"
