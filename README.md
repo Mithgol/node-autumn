@@ -6,7 +6,7 @@ It is called **Autumn** (antonymous to the “Spring” it exports).
 
 ## Installing Autumn
 
-[![(npm package version)](https://nodei.co/npm/autumn.png?downloads=true)](https://npmjs.org/package/autumn) [![(a histogram of downloads)](https://nodei.co/npm-dl/autumn.png?months=3&height=2)](https://npmjs.org/package/autumn)
+[![(npm package version)](https://nodei.co/npm/autumn.png?downloads=true&downloadRank=true)](https://npmjs.org/package/autumn) [![(a histogram of downloads)](https://nodei.co/npm-dl/autumn.png?months=3&height=3)](https://npmjs.org/package/autumn)
 
 * Latest packaged version: `npm install -g autumn`
 
