@@ -28,7 +28,7 @@ Example:
 
 ## Testing Autumn
 
-[![(build testing status)](https://travis-ci.org/Mithgol/node-autumn.svg?branch=master)](https://travis-ci.org/Mithgol/node-autumn)
+[![(build testing status)](https://img.shields.io/travis/Mithgol/node-autumn/master.svg?style=plastic)](https://travis-ci.org/Mithgol/node-autumn)
 
 It is necessary to install [JSHint](http://jshint.com/) for testing.
 
