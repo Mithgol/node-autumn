@@ -4,7 +4,7 @@ It requires [Node.js](http://nodejs.org/) to run and [npm](https://www.npmjs.o
 
 It is called **Autumn** (antonymous to the “Spring” it exports).
 
-**P. S. (3 Sep 2014):** the Formspring API server (`beta-api.formspring.me`) has stopped working, now it just redirects to the Spring.me web site. Autumn is no longer useful unless someone finds a newer RESTful API.
+**P. S. (3 Sep 2014):** the Formspring API server ([`beta-api.formspring.me`](http://beta-api.formspring.me/)) has stopped working, now it just redirects to the Spring.me web site. Autumn is no longer useful unless someone finds a newer RESTful API.
 
 ## Installing Autumn
 
